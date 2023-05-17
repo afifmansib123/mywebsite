@@ -5,12 +5,14 @@ import Pagination from "./pagination"
 const Layout = ({children}) => {
     return (
         <div>
-            <Navbar style={{width: "100%", position: "fixed", top: "0", marginLeft:"20", bottom: "0"}}/>
-            <div style={{width: "100%"  , position: "fixed", top: "0", bottom: "0"}}>
-                <Sidebar style={{ width: "200px",position: "fixed", top: "0", bottom: "0" }}/> </div>
-            <div style={{marginTop: "0px"}}>
+            <Navbar style={{width: "10%"}}/>
+            <div style={{ position: "fixed"}}>
+                <Sidebar/> </div>
+            <div >
                 {children}
+                <div style={{ position: "fixed" , width : "100%"}}>
                 <Pagination/>
+                </div>
             </div>
         </div>
     )

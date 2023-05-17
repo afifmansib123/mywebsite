@@ -46,7 +46,7 @@ const Register = () => {
             display : "flex",
             justifyContent : "right",
             margin : "10px",
-            height : "50vh",
+            height : "70vh",
             width : "50%"
         }}>
         <form>

@@ -3,8 +3,8 @@ const Pagination = () => {
         <div style={{
             display : "flex",
             justifyContent : "right",
-            margin : "10px",
-            height : "50vh",
+            margin : "20px",
+            height : "80vh",
             width : "50%"
         }}>
         <nav aria-label="Page navigation example">
