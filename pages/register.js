@@ -52,7 +52,6 @@ const Register = () => {
         }}>
             {showtoast && (
                 <Toast>
-                    <div>registration successful</div>
                 </Toast>
             )}
         <form>

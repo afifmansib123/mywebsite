@@ -1,34 +1,20 @@
-import React, { useState, useEffect } from "react";
+const Toast = ({msg, handleshow, bgColor}) => {
+    return(
+        <div className={`toast show position-fixed text-light ${bgColor}`}
+        style={{ top: '5px', right: '5px', zIndex: 9, minWidth: '280px' }} >
 
-const Toast = () => {
-  const [showToast, setShowToast] = useState(true);
+            <div className={`toast-header ${bgColor} text-light`}>
+                <strong className="mr-auto text-light">hi</strong>
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
+                <button type="button" className="ml-2 mb-1 close text-light" 
+                data-dismiss="toast" style={{ outline: 'none'}} 
+                onClick={handleshow}>x</button>
+            </div>
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
+            <div className="toast-body">yo</div>
 
-  return (
-    <div
-      style={{
-        position: "fixed",
-        top: "10px",
-        right: "10px",
-        backgroundColor: "#333",
-        color: "#fff",
-        padding: "10px",
-        borderRadius: "4px",
-        display: showToast ? "block" : "none",
-      }}
-    >
-      Hello, world! This is a toast message.
-    </div>
-  );
-};
+        </div>
+    )
+}
 
-export default Toast;
+export default Toast

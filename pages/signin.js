@@ -1,11 +1,21 @@
 import Toast from "@/components/Toast"
 import { useState } from "react"
+import { DataContext } from "@/store/Globalstate"
+import { useContext } from "react"
 
 
 
 const Signin = () => {
 
     const [showtoast, changetoast] = useState(false)
+
+    const [state,dispatch] = useContext(DataContext)
+
+    const testfunction = (e) => {
+        e.preventDefault()
+        dispatch({type : 'NOTIFY', payload : {success: 'OK'}})
+        changetoast(true)
+    }
 
     return (
         <div style={{
@@ -16,9 +26,7 @@ const Signin = () => {
             height : "50vh",
             width : "50%"
         }}>
-            {showtoast && (
-                <Toast/>
-            )}
+            {showtoast && <Toast/>}
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
@@ -34,7 +42,7 @@ const Signin = () => {
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <button onClick={()=>{changetoast(true)}}>press me</button>
+            <button onClick={testfunction}>press me</button>
         </form>
         </div>
     )
