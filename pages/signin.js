@@ -1,4 +1,12 @@
+import Toast from "@/components/Toast"
+import { useState } from "react"
+
+
+
 const Signin = () => {
+
+    const [showtoast, changetoast] = useState(false)
+
     return (
         <div style={{
             width : "100%",
@@ -8,6 +16,9 @@ const Signin = () => {
             height : "50vh",
             width : "50%"
         }}>
+            {showtoast && (
+                <Toast/>
+            )}
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
@@ -23,7 +34,7 @@ const Signin = () => {
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="submit" class="btn btn-primary">press me</button>
+            <button onClick={()=>{changetoast(true)}}>press me</button>
         </form>
         </div>
     )

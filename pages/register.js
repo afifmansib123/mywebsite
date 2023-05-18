@@ -2,11 +2,15 @@ import { INITIAL_STATE } from "./postreducer"
 import { reducerfunction } from "./postreducer"
 import { useReducer } from "react"
 import mongoose from "mongoose"
+import { useState } from "react"
+import Toast from "@/components/Toast"
 
 
 const Register = () => {
 
     const [state,dispatch] = useReducer(reducerfunction,INITIAL_STATE)
+
+    const [showtoast,setshowtoast] = useState(false)
 
     //register api call
     const handlesubmit = async (e) => {
@@ -22,7 +26,7 @@ const Register = () => {
         if (response.ok) {
           console.log('paykhana')
         } else {
-          // handle error
+            setshowtoast(true)
         }
     }
 
@@ -34,10 +38,7 @@ const Register = () => {
         })
     }
 
-    const test = (e) => {
-        e.preventDefault()
-        alert(JSON.stringify(state))
-    }
+
 
     
 
@@ -49,6 +50,11 @@ const Register = () => {
             height : "70vh",
             width : "50%"
         }}>
+            {showtoast && (
+                <Toast>
+                    <div>registration successful</div>
+                </Toast>
+            )}
         <form>
             <div className="form-group">
                 <label>Email address</label>
