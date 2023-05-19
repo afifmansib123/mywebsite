@@ -1,78 +1,59 @@
-import { INITIAL_STATE } from "./postreducer"
-import { reducerfunction } from "./postreducer"
-import { useReducer } from "react"
-import mongoose from "mongoose"
 import { useState } from "react"
-import Toast from "@/components/Toast"
-
+import valid from "@/utils/valid"
+import { useContext } from "react"
+import { DataConext } from "@/store/Globalstate"
 
 const Register = () => {
 
-    const [state,dispatch] = useReducer(reducerfunction,INITIAL_STATE)
+    const initialstate = { name: '', email: '', password: '', cf_password: '' }
+    const [userdata, changestate] = useState(initialstate)
+    const {name , email, password, cf_password} = userdata
 
-    const [showtoast,setshowtoast] = useState(false)
-
-    //register api call
-    const handlesubmit = async (e) => {
-        e.preventDefault()
-  
-        const response = await fetch('/api/users/create',{
-          method:'POST',
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify(state)
-        })
-        if (response.ok) {
-          console.log('paykhana')
-        } else {
-            setshowtoast(true)
-        }
-    }
+    const [state,dispatch] = useContext(DataConext)
 
     const handlechange = (e) => {
+        changestate({ ...userdata, [e.target.name]: e.target.value })
+    }
+    const handlesubmit = (e) => {
         e.preventDefault()
-        dispatch({
-            type : "Changestate",
-            payload : {name : e.target.name, value: e.target.value}
-        })
+       const errMsg = valid(name,email,password,cf_password)
+       if(errMsg) return dispatch({type : "NOTIFY", payload : {error: errMsg}})
+       dispatch({type:'NOTIFY', payload: {success: 'OK'}})
     }
 
-
-
-    
-
-    return(
+    return (
         <div style={{
-            display : "flex",
-            justifyContent : "right",
-            margin : "10px",
-            height : "70vh",
-            width : "50%"
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            height: "80vh",
+            backgroundImage: "url('/image1.jpeg')",
+
         }}>
-            {showtoast && (
-                <Toast>
-                </Toast>
-            )}
-        <form>
-            <div className="form-group">
-                <label>Email address</label>
-                <input  className="form-control"  aria-describedby="emailHelp" placeholder="Enter email" name ="email" onChange={handlechange}/>
-               
-            </div>
-            <div className="form-group">
-                <label>phone number</label>
-                <input  className="form-control"  placeholder="Enter phonenumber" name ="phone" onChange={handlechange}/>
-                
-            </div>
-            <div className="form-group">
-                <label>Password</label>
-                <input  className="form-control"  placeholder="Password" name="password" onChange={handlechange}/>
-            </div>
-           
-            <button className="btn btn-primary" onClick={handlesubmit}>Register</button>
-        </form>
-        </div> 
+
+            <form>
+                <div className="form-group">
+                    <label>Name</label>
+                    <input className="form-control" aria-describedby="emailHelp" placeholder="Enter name" name="name" onChange={handlechange} />
+
+                </div>
+                <div className="form-group">
+                    <label>email</label>
+                    <input className="form-control" placeholder="Enter email" name="email" onChange={handlechange} />
+
+                </div>
+                <div className="form-group">
+                    <label>Password</label>
+                    <input className="form-control" placeholder="enter Password" name="password" onChange={handlechange} />
+                </div>
+
+                <div className="form-group">
+                    <label> Confirm Password</label>
+                    <input className="form-control" placeholder="enter Password" name="cf_password" onChange={handlechange} />
+                </div>
+                <button className="btn btn-primary" onClick={handlesubmit}>Register</button>
+            </form>
+        </div>
     )
 }
 

@@ -1,19 +1,15 @@
 import { createContext, useReducer } from "react";
-import reducerfunc from "./reducerfile";
+import { reducers } from "./reducerfile";
 
-export const DataContext = createContext()
+export const DataConext = createContext()
 
 export const DataProvider = ({children}) => {
-
-
-    const Initialstate = {notify : {}, auth : {}}
-
-    const [state,dispatch] = useReducer(reducerfunc,Initialstate)
+    const initialstate = {notify:{},auth:{}}
+    const [state,dispatch] = useReducer(reducers,initialstate)
 
     return(
-        <DataContext.Provider value = {[state,dispatch]}>
+        <DataConext.Provider value={[state,dispatch]}>
             {children}
-        </DataContext.Provider>
+        </DataConext.Provider>
     )
-
 }

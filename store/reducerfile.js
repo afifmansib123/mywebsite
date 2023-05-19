@@ -1,23 +1,23 @@
 export const ACTIONS = {
-    notify : "NOTIFY",
-    auth : 'AUTH',
+    NOTIFY : 'NOTIFY',
+    AUTH : 'AUTH'
 }
 
-const reducerfunc = (state,action) => {
+export const reducers = (state,action) => {
     switch(action.type){
-        case "ACTIONS.NOTIFY":
+        case ACTIONS.NOTIFY :
             return {
                 ...state,
-                notify : action.payload,
+                notify : action.payload
             }
-        case "ACTIONS.AUTH":
-            return{
+        case ACTIONS.AUTH :
+            return {
                 ...state,
-                auth : action.payload,
+                auth : action.payload
             }
-        default :
+        default : 
         return state
     }
 }
 
-export default reducerfunc
+

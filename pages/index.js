@@ -11,8 +11,8 @@ export default function Home() {
       width:"100%",
       display : "flex",
       justifyContent : "center",
-      height : "150vh",
-      backgroundImage : "url('/images.png')",
+      height : "80vh",
+      backgroundImage : "url('/image1.jpeg')",
     }}>
       index page
     </div>

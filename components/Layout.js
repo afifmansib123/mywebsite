@@ -6,10 +6,12 @@ const Layout = ({children}) => {
     return (
         <div>
             <Navbar style={{width: "10%"}}/>
-            <div style={{ position: "fixed"}}>
+            <div style={{ position: "fixed" , justifyContent:"center" , backgroundImage : "url('/image1.jpeg')",}}>
                 <Sidebar/> </div>
-            <div >
+            <div style={{width : "100%"}}>
+                <div style={{position:"right" , justifyContent:"center"}}>
                 {children}
+                </div>
                 <div style={{ position: "fixed" , width : "100%"}}>
                 <Pagination/>
                 </div>
