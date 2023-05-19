@@ -14,11 +14,23 @@ const Register = () => {
     const handlechange = (e) => {
         changestate({ ...userdata, [e.target.name]: e.target.value })
     }
-    const handlesubmit = (e) => {
+    const handlesubmit = async(e) => {
         e.preventDefault()
        const errMsg = valid(name,email,password,cf_password)
        if(errMsg) return dispatch({type : "NOTIFY", payload : {error: errMsg}})
        dispatch({type:'NOTIFY', payload: {success: 'OK'}})
+       const response = await fetch('/api/users/create',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({name,email,password})
+      })
+      if (response.ok) {
+        console.log('yay')
+      } else {
+        console.log('hagumutu')
+      }
     }
 
     return (
