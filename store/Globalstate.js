@@ -8,7 +8,7 @@ export const DataProvider = ({children}) => {
     const [state,dispatch] = useReducer(reducers,initialstate)
 
     return(
-        <DataConext.Provider value={[state,dispatch]}>
+        <DataConext.Provider value={{state,dispatch}}>
             {children}
         </DataConext.Provider>
     )

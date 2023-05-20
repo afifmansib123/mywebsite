@@ -8,7 +8,6 @@ export default function App({ Component, pageProps }) {
     <DataProvider>
       <Layout>
         <Component {...pageProps} />
-        <Notify />
       </Layout>
       </DataProvider>
   )

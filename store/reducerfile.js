@@ -3,6 +3,7 @@ export const ACTIONS = {
     AUTH : 'AUTH'
 }
 
+
 export const reducers = (state,action) => {
     switch(action.type){
         case ACTIONS.NOTIFY :

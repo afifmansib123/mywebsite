@@ -9,7 +9,7 @@ const Register = () => {
     const [userdata, changestate] = useState(initialstate)
     const {name , email, password, cf_password} = userdata
 
-    const [state,dispatch] = useContext(DataConext)
+    const {state,dispatch} = useContext(DataConext)
 
     const handlechange = (e) => {
         changestate({ ...userdata, [e.target.name]: e.target.value })
@@ -18,7 +18,7 @@ const Register = () => {
         e.preventDefault()
        const errMsg = valid(name,email,password,cf_password)
        if(errMsg) return dispatch({type : "NOTIFY", payload : {error: errMsg}})
-       dispatch({type:'NOTIFY', payload: {success: 'OK'}})
+       dispatch({type:'NOTIFY', payload: {}})
        const response = await fetch('/api/users/create',{
         method:'POST',
         headers:{
@@ -26,11 +26,7 @@ const Register = () => {
         },
         body:JSON.stringify({name,email,password})
       })
-      if (response.ok) {
-        console.log('yay')
-      } else {
-        console.log('hagumutu')
-      }
+      dispatch({type:'NOTIFY', payload: {success: response.msg}})
     }
 
     return (

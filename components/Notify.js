@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Toast from "./Toast";
 
 export const Notify = () => {
-    const [state, dispatch] = useContext(DataConext)
+    const {state, dispatch} = useContext(DataConext)
     const { notify } = state
 
     return (
