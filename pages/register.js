@@ -2,12 +2,14 @@ import { useState } from "react"
 import valid from "@/utils/valid"
 import { useContext } from "react"
 import { DataConext } from "@/store/Globalstate"
+import Toast from "@/components/Toast"
 
 const Register = () => {
 
     const initialstate = { name: '', email: '', password: '', cf_password: '' }
     const [userdata, changestate] = useState(initialstate)
     const {name , email, password, cf_password} = userdata
+    const [showtoast,changetoast] = useState(false)
 
     const {state,dispatch} = useContext(DataConext)
 
@@ -27,6 +29,8 @@ const Register = () => {
         body:JSON.stringify({name,email,password})
       })
       dispatch({type:'NOTIFY', payload: {success: response.msg}})
+      changetoast(true)
+     
     }
 
     return (
@@ -38,6 +42,8 @@ const Register = () => {
             backgroundImage: "url('/image1.jpeg')",
 
         }}>
+
+            
 
             <form>
                 <div className="form-group">
@@ -61,6 +67,7 @@ const Register = () => {
                 </div>
                 <button className="btn btn-primary" onClick={handlesubmit}>Register</button>
             </form>
+            {showtoast && <Toast msg={{title : 'register successful', msg: 'registration successful'}} bgColor={'pink'} handleshow={()=>changetoast(false)} />}
         </div>
     )
 }
